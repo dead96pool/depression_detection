@@ -1,0 +1,77 @@
+formulas:
+
+Measure	Value							Derivations
+Sensitivity								TPR = TP / (TP + FN)
+Specificity								SPC = TN / (FP + TN)
+Precision								PPV = TP / (TP + FP)
+Negative Predictive Value				NPV = TN / (TN + FN)
+False Negative Rate						FNR = FN / (FN + TP)
+Accuracy								ACC = (TP + TN) / (P + N)
+F1 Score								F1 = 2TP / (2TP + FP + FN)
+Matthews Correlation Coefficient(MCC)	TP*TN - FP*FN / sqrt((TP+FP)*(TP+FN)*(TN+FP)*(TN+FN))
+
+
+
+
+results:
+Random Forest (video modality):
+Accuracy: 0.7746
+Precision: 0.8883
+Recall: 0.3123
+F1 Score: 0.4622
+Specificity: 0.9823
+Negative Predictive Value: 0.7607
+ROC-AUC: 0.6473
+False Negative Rate: 0.6877
+Mathews Correlation Coefficient: 0.4373
+
+
+
+FFNN (video modality):
+Accuracy: 0.7799
+Precision: 0.6580
+Recall: 0.6066
+F1 Score: 0.6313
+Specificity: 0.8580
+Negative Predictive Value: 0.8288
+ROC-AUC: 0.7323
+False Negative Rate: 0.3934
+Mathews Correlation Coefficient: 0.4756
+
+
+
+BiLSTM + Attention (audio modality):
+Accuracy: 0.8768
+Precision: 0.8410
+Recall: 0.7203
+F1 Score: 0.7760
+Specificity: 0.9426
+Negative Predictive Value: 0.8889
+ROC-AUC: 0.8315
+False Negative Rate: 0.2797
+Mathews Correlation Coefficient: 0.6956
+
+
+LightGBM (video modality):
+Accuracy: 0.7193
+Precision: 0.6444
+Recall: 0.2144
+F1 Score: 0.3218
+Specificity: 0.9467
+Negative Predictive Value: 0.7280
+ROC-AUC: 0.5806
+False Negative Rate: 0.7856
+Mathews Correlation Coefficient: 0.2450
+
+
+
+BiLSTM + Attention (Multimodal):
+Accuracy: 0.9348
+Precision: 0.8594
+Recall: 0.9448
+F1 Score: 0.9000
+Specificity: 0.9303
+Negative Predictive Value: 0.9739
+ROC-AUC: 0.9375
+False Negative Rate: 0.0552
+Mathews Correlation Coefficient: 0.8539

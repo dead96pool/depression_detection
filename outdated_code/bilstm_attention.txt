@@ -1,0 +1,52 @@
+from tensorflow.keras.layers import Multiply
+
+def build_bilstm_attention_branch(input_shape):
+    input_layer = Input(shape=input_shape)
+
+    # BiLSTM Layer
+    bilstm = Bidirectional(LSTM(64, return_sequences=True))(input_layer)
+    
+    # Attention Layer
+    attention = Attention()([bilstm, bilstm])
+    
+    # Concatenate BiLSTM output with Attention output
+    combined = Concatenate()([bilstm, attention])
+
+    # Apply GlobalMaxPooling1D to reduce sequence dimension
+    pooling = GlobalMaxPooling1D()(combined)
+
+    return input_layer, pooling
+
+# Define input shapes for both modalities
+video_input_shape = (sequence_length, num_features)
+audio_input_shape = (sequence_length_audio, num_features_audio)
+
+# Build video branch
+video_input, video_branch_output = build_bilstm_attention_branch(video_input_shape)
+
+# Build audio branch
+audio_input, audio_branch_output = build_bilstm_attention_branch(audio_input_shape)
+
+# Concatenate the outputs from both branches
+merged = Concatenate()([video_branch_output, audio_branch_output])
+
+# Dense layers after concatenation
+dense = Dense(128, activation='relu')(merged)
+dropout = Dropout(0.5)(dense)
+
+# Output layer for binary classification
+output_layer = Dense(1, activation='sigmoid')(dropout)
+
+# Define the multimodal model
+multimodal_model = Model(inputs=[video_input, audio_input], outputs=output_layer)
+multimodal_model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])
+
+# Summary of the model
+multimodal_model.summary()
+
+# Train the model (assuming X_train_video and X_train_audio are your training datasets)
+history = multimodal_model.fit(
+    [X_train_video, X_train_audio], y_train, 
+    epochs=10, batch_size=32, 
+    validation_data=([X_test_video, X_test_audio], y_test)
+)

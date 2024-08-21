@@ -1,0 +1,3 @@
+Separate Models with Late Fusion: Train separate models for audio and video and then combine their predictions (late fusion). This way, you don't need to worry about resampling but rather about combining the predictions from the two modalities.
+
+Multi-Input Neural Networks: If you’re using deep learning, consider architectures that can handle inputs of different lengths, such as Recurrent Neural Networks (RNNs) or transformers, which can process sequences of varying lengths.
